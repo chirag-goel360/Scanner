@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:async';
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 
 class GenerateCode extends StatefulWidget {
   @override
@@ -14,27 +14,10 @@ class GenerateCode extends StatefulWidget {
 }
 
 class _GenerateCodeState extends State<GenerateCode> {
-  String datainString = "Hi from this QR Code Scanner";
-  String inputerror;
+  String _datainString = "Hi from this QR Code Scanner";
+  String _inputerror;
   final TextEditingController _textEditingController = TextEditingController();
   GlobalKey globalKey = new GlobalKey();
-
-  Future<void> sharecode() async{
-    try{
-      RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
-      var item = await boundary.toImage();
-      ByteData byteData = await item.toByteData(format: ImageByteFormat.png);
-      Uint8List Bytes = byteData.buffer.asUint8List();
-      final tempDir = await getTemporaryDirectory();
-      final file = await new File('${tempDir.path}/image.png').create();
-      await file.writeAsBytes(Bytes);
-      final channel = MethodChannel('channel:me.alfian.share/share');
-      channel.invokeMethod('shareFile','image.png');
-    }
-    catch(e){
-      print(e.toString());
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,17 +48,18 @@ class _GenerateCodeState extends State<GenerateCode> {
                         controller: _textEditingController,
                         decoration: InputDecoration(
                           hintText: "Enter a custom Message",
-                          errorText: inputerror,
+                          errorText: _inputerror,
                         ),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: FlatButton(
+                        child:  Text("SUBMIT"),
                         onPressed: (){
                           setState(() {
-                            datainString = _textEditingController.text;
-                            inputerror = null;
+                            _datainString = _textEditingController.text;
+                            _inputerror = null;
                           });
                         },
                       ),
@@ -89,7 +73,8 @@ class _GenerateCodeState extends State<GenerateCode> {
                 child: RepaintBoundary(
                   key: globalKey,
                   child: QrImage(
-                    data: datainString,
+                    backgroundColor: Colors.white,
+                    data: _datainString,
                     size: 0.5 * (MediaQuery.of(context).size.height-MediaQuery.of(context).viewInsets.bottom),
                   ),
                 ),
@@ -100,5 +85,20 @@ class _GenerateCodeState extends State<GenerateCode> {
       ),
     );
   }
+  Future<void> sharecode() async{
+    try{
+      RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
+      var item = await boundary.toImage();
+      ByteData byteData = await item.toByteData(format: ImageByteFormat.png);
+      await Share.file(
+          'esys image', 'qrcode.png',
+          byteData.buffer.asUint8List(),
+          'image/png',
+          text: 'Generated Qr Code'
+      );
+    }
+    catch(e){
+      print(e.toString());
+    }
+  }
 }
-
