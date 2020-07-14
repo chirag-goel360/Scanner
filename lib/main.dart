@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:scanner/homescreen.dart';
+import 'package:scanner/QrSource/homescreen.dart';
 
 void main() => runApp(MyApp());
 

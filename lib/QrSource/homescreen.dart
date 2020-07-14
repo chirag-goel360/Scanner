@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:scanner/scancodescreen.dart';
-import 'generatecodescreen.dart';
+import 'package:scanner/QrSource/generatecodescreen.dart';
+import 'package:scanner/QrSource/scancodescreen.dart';
 
 class HomePage extends StatelessWidget {
   @override
