@@ -7,12 +7,12 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:async';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 
-class GenerateCode extends StatefulWidget {
+class GenerateQRCode extends StatefulWidget {
   @override
-  _GenerateCodeState createState() => _GenerateCodeState();
+  _GenerateQRCodeState createState() => _GenerateQRCodeState();
 }
 
-class _GenerateCodeState extends State<GenerateCode> {
+class _GenerateQRCodeState extends State<GenerateQRCode> {
   String _datainString = "Hi from this QR Code Scanner";
   String _inputerror;
   final TextEditingController _textEditingController = TextEditingController();
@@ -93,7 +93,7 @@ class _GenerateCodeState extends State<GenerateCode> {
           'esys image', 'qrcode.png',
           byteData.buffer.asUint8List(),
           'image/png',
-          text: 'Generated Qr Code'
+          text: _datainString
       );
     }
     catch(e){
