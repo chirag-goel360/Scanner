@@ -26,41 +26,56 @@ class _HomePageState extends State<HomePage> {
             image: DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
-                  'https://miro.medium.com/max/875/1*PnL11kDL6vX52Ki6_U3u1Q.png'),
+                'https://miro.medium.com/max/875/1*PnL11kDL6vX52Ki6_U3u1Q.png',
+              ),
             ),
           ),
           child: Center(
             child: Container(
               child: Text(
                 'Max Scanner',
-                style: TextStyle(fontSize: 45.0, color: Colors.pinkAccent),
+                style: TextStyle(
+                  fontSize: 45.0,
+                  color: Colors.pinkAccent,
+                ),
               ),
             ),
           ),
         ),
         ListTile(
-          title: Text('QR Code Generator'),
+          title: Text(
+            'QR Code Generator',
+          ),
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => GenerateQRCode()));
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) => GenerateQRCode(),
+            ),
+            );
           },
         ),
         ListTile(
-          title: Text('BarCode Generator'),
+          title: Text(
+            'BarCode Generator',
+          ),
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => BarCodeGenerateScreen()));
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) => BarCodeGenerateScreen(),
+            ),
+            );
           },
         ),
       ],
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('QR and Barcode Scanner'),
+        title: Text(
+          'QR and Barcode Scanner',
+        ),
       ),
       drawer: Drawer(
         child: _getDrawer(context),
@@ -71,7 +86,10 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 8,horizontal: 16),
+              padding: EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
+              ),
               child: RaisedButton(
                 color: Colors.blue,
                 textColor: Colors.white,
@@ -79,18 +97,27 @@ class _HomePageState extends State<HomePage> {
                 onPressed: (){
                   scancode();
                 },
-                child: const Text('Start Scanning'),
+                child: const Text(
+                  'Start Scanning',
+                ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-              child: Text(qrcode,textAlign: TextAlign.center,),
-            )
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
+              ),
+              child: Text(
+                qrcode,
+                textAlign: TextAlign.center,
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
   Future scancode() async{
     try{
       ScanResult qrcoderes = await BarcodeScanner.scan();

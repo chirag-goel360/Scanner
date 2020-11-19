@@ -22,12 +22,16 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('QR Code Generator'),
+        title: Text(
+          'QR Code Generator',
+        ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.share),
+            icon: Icon(
+              Icons.share,
+            ),
             onPressed: sharecode,
-          )
+          ),
         ],
       ),
       body: Container(
@@ -35,7 +39,12 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 50,left: 20,right: 10,bottom: 20),
+              padding: EdgeInsets.only(
+                top: 50,
+                left: 20,
+                right: 10,
+                bottom: 20,
+              ),
               child: Container(
                 height: 50,
                 child: Row(
@@ -52,9 +61,13 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 10),
+                      padding: EdgeInsets.only(
+                        left: 10,
+                      ),
                       child: FlatButton(
-                        child:  Text("SUBMIT"),
+                        child:  Text(
+                          "SUBMIT",
+                        ),
                         onPressed: (){
                           setState(() {
                             _datainString = _textEditingController.text;
@@ -62,7 +75,7 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
                           });
                         },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -78,22 +91,26 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
+
   Future<void> sharecode() async{
     try{
       RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
       var item = await boundary.toImage();
-      ByteData byteData = await item.toByteData(format: ImageByteFormat.png);
+      ByteData byteData = await item.toByteData(
+        format: ImageByteFormat.png,
+      );
       await Share.file(
-          'esys image', 'qrcode.png',
-          byteData.buffer.asUint8List(),
-          'image/png',
-          text: _datainString
+        'esys image',
+        'qrcode.png',
+        byteData.buffer.asUint8List(),
+        'image/png',
+        text: _datainString,
       );
     }
     catch(e){
