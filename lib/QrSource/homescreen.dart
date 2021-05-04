@@ -47,9 +47,11 @@ class _HomePageState extends State<HomePage> {
             'QR Code Generator',
           ),
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) => GenerateQRCode(),
-            ),
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GenerateQRCode(),
+              ),
             );
           },
         ),
@@ -58,9 +60,11 @@ class _HomePageState extends State<HomePage> {
             'BarCode Generator',
           ),
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) => BarCodeGenerateScreen(),
-            ),
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BarCodeGenerateScreen(),
+              ),
             );
           },
         ),
@@ -94,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.blue,
                 textColor: Colors.white,
                 splashColor: Colors.blueGrey,
-                onPressed: (){
+                onPressed: () {
                   scancode();
                 },
                 child: const Text(
@@ -118,32 +122,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future scancode() async{
-    try{
+  Future scancode() async {
+    try {
       ScanResult qrcoderes = await BarcodeScanner.scan();
-      if(qrcoderes.type == ResultType.Barcode)
+      if (qrcoderes.type == ResultType.Barcode)
         setState(() {
           this.qrcode = qrcoderes.rawContent;
         });
-    }
-    on PlatformException catch (e){
-      if(e.code == BarcodeScanner.cameraAccessDenied){
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
         setState(() {
-          this.qrcode = 'The user not allowed access to camera to the application';
+          this.qrcode =
+              'The user not allowed access to camera to the application';
         });
-      }
-      else{
+      } else {
         setState(() {
           this.qrcode = 'Unknown error';
         });
       }
-    }
-    on FormatException{
+    } on FormatException {
       setState(() {
         this.qrcode = 'back button pressed before scanning';
       });
-    }
-    catch(e){
+    } catch (e) {
       setState(() {
         this.qrcode = 'Unknown error';
       });

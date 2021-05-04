@@ -65,10 +65,10 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
                         left: 10,
                       ),
                       child: FlatButton(
-                        child:  Text(
+                        child: Text(
                           "SUBMIT",
                         ),
-                        onPressed: (){
+                        onPressed: () {
                           setState(() {
                             _datainString = _textEditingController.text;
                             _inputerror = null;
@@ -87,7 +87,9 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
                   child: QrImage(
                     backgroundColor: Colors.white,
                     data: _datainString,
-                    size: 0.5 * (MediaQuery.of(context).size.height-MediaQuery.of(context).viewInsets.bottom),
+                    size: 0.5 *
+                        (MediaQuery.of(context).size.height -
+                            MediaQuery.of(context).viewInsets.bottom),
                   ),
                 ),
               ),
@@ -98,9 +100,10 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
     );
   }
 
-  Future<void> sharecode() async{
-    try{
-      RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
+  Future<void> sharecode() async {
+    try {
+      RenderRepaintBoundary boundary =
+          globalKey.currentContext.findRenderObject();
       var item = await boundary.toImage();
       ByteData byteData = await item.toByteData(
         format: ImageByteFormat.png,
@@ -112,8 +115,7 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
         'image/png',
         text: _datainString,
       );
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }

@@ -63,10 +63,10 @@ class _BarCodeGenerateScreenState extends State<BarCodeGenerateScreen> {
                         left: 10,
                       ),
                       child: FlatButton(
-                        child:  Text(
+                        child: Text(
                           "SUBMIT",
                         ),
-                        onPressed: (){
+                        onPressed: () {
                           setState(() {
                             _datainString = _textEditingController.text;
                             _inputerror = null;
@@ -97,9 +97,10 @@ class _BarCodeGenerateScreenState extends State<BarCodeGenerateScreen> {
     );
   }
 
-  Future<void> sharecode() async{
-    try{
-      RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
+  Future<void> sharecode() async {
+    try {
+      RenderRepaintBoundary boundary =
+          globalKey.currentContext.findRenderObject();
       var item = await boundary.toImage();
       ByteData byteData = await item.toByteData(
         format: ImageByteFormat.png,
@@ -111,8 +112,7 @@ class _BarCodeGenerateScreenState extends State<BarCodeGenerateScreen> {
         'image/png',
         text: _datainString,
       );
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
