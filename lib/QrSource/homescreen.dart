@@ -94,10 +94,12 @@ class _HomePageState extends State<HomePage> {
                 vertical: 8,
                 horizontal: 16,
               ),
-              child: RaisedButton(
-                color: Colors.blue,
-                textColor: Colors.white,
-                splashColor: Colors.blueGrey,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  onPrimary: Colors.white,
+                  onSurface: Colors.blueGrey,
+                ),
                 onPressed: () {
                   scancode();
                 },

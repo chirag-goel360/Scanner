@@ -64,7 +64,7 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
                       padding: EdgeInsets.only(
                         left: 10,
                       ),
-                      child: FlatButton(
+                      child: TextButton(
                         child: Text(
                           "SUBMIT",
                         ),

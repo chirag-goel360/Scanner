@@ -62,7 +62,7 @@ class _BarCodeGenerateScreenState extends State<BarCodeGenerateScreen> {
                       padding: EdgeInsets.only(
                         left: 10,
                       ),
-                      child: FlatButton(
+                      child: TextButton(
                         child: Text(
                           "SUBMIT",
                         ),
